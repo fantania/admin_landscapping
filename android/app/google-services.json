@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "432872752722",
+    "project_id": "admin-landscaping",
+    "storage_bucket": "admin-landscaping.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:432872752722:android:164e8cc6469811e359818b",
+        "android_client_info": {
+          "package_name": "com.example.admin_landscapping"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "432872752722-ieg2fs3mq5pveuj3auiqkmofojtt557t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASfBYCuyTY70ApW-WDEx3uI3TCn6Ppf0k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "432872752722-ieg2fs3mq5pveuj3auiqkmofojtt557t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
