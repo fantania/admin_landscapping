@@ -1,4 +1,4 @@
-package com.example.admin_landscapping
+package com.schedule.admin_landscapping
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,7 +1,7 @@
 {
   "file_generated_by": "FlutterFire CLI",
   "purpose": "FirebaseAppID & ProjectID for this Firebase app in this directory",
-  "GOOGLE_APP_ID": "1:432872752722:ios:6a2131f56c3c985059818b",
-  "FIREBASE_PROJECT_ID": "admin-landscaping",
-  "GCM_SENDER_ID": "432872752722"
+  "GOOGLE_APP_ID": "1:499644514185:ios:872166a6788fcd75ee6b58",
+  "FIREBASE_PROJECT_ID": "scheduler-admin-panel-ffb19",
+  "GCM_SENDER_ID": "499644514185"
 }

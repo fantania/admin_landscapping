@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.admin_landscapping">
+    package="com.schedule.admin_landscapping">
    <application
         android:label="admin_landscapping"
         android:name="${applicationName}"

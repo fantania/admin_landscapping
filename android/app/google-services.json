@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "432872752722",
-    "project_id": "admin-landscaping",
-    "storage_bucket": "admin-landscaping.appspot.com"
+    "project_number": "499644514185",
+    "project_id": "scheduler-admin-panel-ffb19",
+    "storage_bucket": "scheduler-admin-panel-ffb19.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:432872752722:android:164e8cc6469811e359818b",
+        "mobilesdk_app_id": "1:499644514185:android:4dcc04d85dcc561cee6b58",
         "android_client_info": {
-          "package_name": "com.example.admin_landscapping"
+          "package_name": "com.schedule.admin_landscapping"
         }
       },
       "oauth_client": [
         {
-          "client_id": "432872752722-ieg2fs3mq5pveuj3auiqkmofojtt557t.apps.googleusercontent.com",
+          "client_id": "499644514185-hn9n147l5p1ulltujo95u2bkcfa5n2t9.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyASfBYCuyTY70ApW-WDEx3uI3TCn6Ppf0k"
+          "current_key": "AIzaSyCrjv-uWurEyF8tSj35kLrrE8vvVtLXILs"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "432872752722-ieg2fs3mq5pveuj3auiqkmofojtt557t.apps.googleusercontent.com",
+              "client_id": "499644514185-hn9n147l5p1ulltujo95u2bkcfa5n2t9.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

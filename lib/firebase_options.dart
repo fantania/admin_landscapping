@@ -44,39 +44,39 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDx3EzrqdwCLKr1LCsQUFm7tZjPDpW8vhw',
-    appId: '1:432872752722:web:d80ba0826cf7f97f59818b',
-    messagingSenderId: '432872752722',
-    projectId: 'admin-landscaping',
-    authDomain: 'admin-landscaping.firebaseapp.com',
-    storageBucket: 'admin-landscaping.appspot.com',
+    apiKey: 'AIzaSyCVNsxs8BTLg_ulg9aJt73R8IMfpXJOxQk',
+    appId: '1:499644514185:web:1f14748994728878ee6b58',
+    messagingSenderId: '499644514185',
+    projectId: 'scheduler-admin-panel-ffb19',
+    authDomain: 'scheduler-admin-panel-ffb19.firebaseapp.com',
+    storageBucket: 'scheduler-admin-panel-ffb19.appspot.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyASfBYCuyTY70ApW-WDEx3uI3TCn6Ppf0k',
-    appId: '1:432872752722:android:164e8cc6469811e359818b',
-    messagingSenderId: '432872752722',
-    projectId: 'admin-landscaping',
-    storageBucket: 'admin-landscaping.appspot.com',
+    apiKey: 'AIzaSyCrjv-uWurEyF8tSj35kLrrE8vvVtLXILs',
+    appId: '1:499644514185:android:4dcc04d85dcc561cee6b58',
+    messagingSenderId: '499644514185',
+    projectId: 'scheduler-admin-panel-ffb19',
+    storageBucket: 'scheduler-admin-panel-ffb19.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAyWUO75i4aKC7iPjlJRruXqKAJCIhXVnU',
-    appId: '1:432872752722:ios:6a2131f56c3c985059818b',
-    messagingSenderId: '432872752722',
-    projectId: 'admin-landscaping',
-    storageBucket: 'admin-landscaping.appspot.com',
-    iosClientId: '432872752722-4bfrkbbeq8duk90lcgbnf5ugthkia7f5.apps.googleusercontent.com',
+    apiKey: 'AIzaSyAWQXmpn2p3uFTfBzq0P83ZIEg7UXzrzL8',
+    appId: '1:499644514185:ios:872166a6788fcd75ee6b58',
+    messagingSenderId: '499644514185',
+    projectId: 'scheduler-admin-panel-ffb19',
+    storageBucket: 'scheduler-admin-panel-ffb19.appspot.com',
+    iosClientId: '499644514185-fm56rlmltddrs40jfpvd7n0gqh4i9j9r.apps.googleusercontent.com',
     iosBundleId: 'com.example.adminLandscapping',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyAyWUO75i4aKC7iPjlJRruXqKAJCIhXVnU',
-    appId: '1:432872752722:ios:6a2131f56c3c985059818b',
-    messagingSenderId: '432872752722',
-    projectId: 'admin-landscaping',
-    storageBucket: 'admin-landscaping.appspot.com',
-    iosClientId: '432872752722-4bfrkbbeq8duk90lcgbnf5ugthkia7f5.apps.googleusercontent.com',
+    apiKey: 'AIzaSyAWQXmpn2p3uFTfBzq0P83ZIEg7UXzrzL8',
+    appId: '1:499644514185:ios:872166a6788fcd75ee6b58',
+    messagingSenderId: '499644514185',
+    projectId: 'scheduler-admin-panel-ffb19',
+    storageBucket: 'scheduler-admin-panel-ffb19.appspot.com',
+    iosClientId: '499644514185-fm56rlmltddrs40jfpvd7n0gqh4i9j9r.apps.googleusercontent.com',
     iosBundleId: 'com.example.adminLandscapping',
   );
 }

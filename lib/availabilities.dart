@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Availabilities extends StatefulWidget {
   const Availabilities({super.key});
 
@@ -9,15 +10,14 @@ class Availabilities extends StatefulWidget {
 }
 
 class _AvailabilitiesState extends State<Availabilities> {
-  CollectionReference availabilities = FirebaseFirestore.instance.collection('availabilities');
-  
-
+  CollectionReference availabilities =
+      FirebaseFirestore.instance.collection('availabilities');
 
   late String _setTime, _setDate;
 
   // var times = [];
 
-   String? _hour, _minute, _time;
+  String? _hour, _minute, _time;
 
   late String? date = "";
 
@@ -39,22 +39,27 @@ class _AvailabilitiesState extends State<Availabilities> {
   }
 
   Future<void> _selectTime() async {
-  final TimeOfDay? picked = await showTimePicker(
-    context: context,
-    initialTime: selectedTime,
-  );
-  if (picked != null) {
-    setState(() {
-      selectedTime = picked;
-      _hour = selectedTime.hourOfPeriod.toString().padLeft(2, '0'); // add leading zero if needed
-      _minute = selectedTime.minute.toString().padLeft(2, '0'); // add leading zero if needed
-      _time = '${selectedTime.hour}:${_minute} ${selectedTime.period.index == 0 ? "AM" : "PM"}';
-      // times.add(_time);
-    });
+    final TimeOfDay? picked = await showTimePicker(
+      context: context,
+      initialTime: selectedTime,
+    );
+    if (picked != null) {
+      setState(() {
+        selectedTime = picked;
+        _hour = selectedTime.hourOfPeriod
+            .toString()
+            .padLeft(2, '0'); // add leading zero if needed
+        _minute = selectedTime.minute
+            .toString()
+            .padLeft(2, '0'); // add leading zero if needed
+        _time =
+            '${selectedTime.hour}:${_minute} ${selectedTime.period.index == 0 ? "AM" : "PM"}';
+        // times.add(_time);
+      });
+    }
   }
-}
 
-    Future<void> _saveData() async {
+  Future<void> _saveData() async {
     // Replace <YOUR_COLLECTION_NAME> with the name of your Firestore collection
     CollectionReference availabilities =
         FirebaseFirestore.instance.collection('availabilities');
@@ -80,11 +85,17 @@ class _AvailabilitiesState extends State<Availabilities> {
     Stream<QuerySnapshot> stream = availabilities.snapshots();
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      floatingActionButton: FloatingActionButton(onPressed: (){
-          _time!=null || date!=""? _saveData():ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Select time and date')),
-    );;
-      },child: Icon(Icons.add),),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          _time != null || date != ""
+              ? _saveData()
+              : ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Select time and date')),
+                );
+          ;
+        },
+        child: Icon(Icons.add),
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -133,47 +144,53 @@ class _AvailabilitiesState extends State<Availabilities> {
               ),
             ),
 
-           StreamBuilder<QuerySnapshot>(
-  stream: stream,
-  builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-    if (!snapshot.hasData) {
-      return CircularProgressIndicator();
-    } else {
-      List<DocumentSnapshot> documents = snapshot.data!.docs;
-      return Container(
-  height: 400,
-  child: ListView.builder(
-    itemCount: documents.length,
-    itemBuilder: (BuildContext context, int index) {
-      Map<String, dynamic> data = documents[index].data() as Map<String, dynamic>;
-      return Card(
-        elevation: 4,
-        margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-        child: ListTile(
-          title: Text(
-            data['date'],
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          subtitle: Text(
-            data['time'],
-            style: TextStyle(fontSize: 16),
-          ),
-          trailing: Icon(Icons.timelapse_sharp),
-          onTap: () {
-            // add your onTap logic here
-          },
-        ),
-      );
-    },
-  ),
-);
+            StreamBuilder<QuerySnapshot>(
+              stream: stream,
+              builder: (BuildContext context,
+                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                if (!snapshot.hasData) {
+                  return CircularProgressIndicator();
+                } else {
+                  List<DocumentSnapshot> documents = snapshot.data!.docs;
+                  return Container(
+                    height: 400,
+                    child: ListView.builder(
+                      itemCount: documents.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        Map<String, dynamic> data =
+                            documents[index].data() as Map<String, dynamic>;
+                        return InkWell(
+                          onLongPress: ()async{
+                            await FirebaseFirestore.instance.collection('availabilities').doc(documents[index].id).delete();
+                          },
+                          child: Card(
+                            elevation: 4,
+                            margin:
+                                EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                            child: ListTile(
+                              title: Text(
+                                data['date'],
+                                style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.bold),
+                              ),
+                              subtitle: Text(
+                                data['time'],
+                                style: TextStyle(fontSize: 16),
+                              ),
+                              trailing: Icon(Icons.timelapse_sharp),
+                              onTap: () {
+                                // add your onTap logic here
+                              },
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                }
+              },
+            )
 
-    }
-  },
-)
-
-
-            
             // Card(
             //   margin: const EdgeInsets.all(10),
             //   color: Colors.green[100],
