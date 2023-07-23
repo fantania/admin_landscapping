@@ -15,8 +15,6 @@ class _AvailabilitiesState extends State<Availabilities> {
 
   late String _setTime, _setDate;
 
-  // var times = [];
-
   String? _hour, _minute, _time;
 
   late String? date = "";
@@ -24,13 +22,15 @@ class _AvailabilitiesState extends State<Availabilities> {
   DateTime selectedDate = DateTime.now();
 
   TimeOfDay selectedTime = TimeOfDay(hour: 00, minute: 00);
+
   Future<void> _selectDate() async {
     final DateTime? picked = await showDatePicker(
-        context: context,
-        initialDate: selectedDate,
-        initialDatePickerMode: DatePickerMode.day,
-        firstDate: DateTime(2015),
-        lastDate: DateTime(2101));
+      context: context,
+      initialDate: selectedDate,
+      initialDatePickerMode: DatePickerMode.day,
+      firstDate: DateTime(2015),
+      lastDate: DateTime(2101),
+    );
     if (picked != null) {
       setState(() {
         date = DateFormat.yMd().format(picked);
@@ -54,29 +54,50 @@ class _AvailabilitiesState extends State<Availabilities> {
             .padLeft(2, '0'); // add leading zero if needed
         _time =
             '${selectedTime.hour}:${_minute} ${selectedTime.period.index == 0 ? "AM" : "PM"}';
-        // times.add(_time);
       });
     }
   }
 
   Future<void> _saveData() async {
-    // Replace <YOUR_COLLECTION_NAME> with the name of your Firestore collection
     CollectionReference availabilities =
         FirebaseFirestore.instance.collection('availabilities');
 
-    // Create a new document with a unique ID
-    DocumentReference documentReference = availabilities.doc();
+    // Query the Firestore to check if a document with the selected date already exists
+    QuerySnapshot querySnapshot = await availabilities
+        .where('date', isEqualTo: date)
+        .limit(1)
+        .get();
 
-    // Set the data for the document
-    await documentReference.set({
-      'date': date,
-      'time': _time,
-      'created_at': DateTime.now(),
-    });
+    if (querySnapshot.docs.isNotEmpty) {
+      // If the document with the selected date exists, update the time slots list
+      DocumentSnapshot documentSnapshot = querySnapshot.docs.first;
+      List<String> timeSlots = List.from(documentSnapshot['time_slots']);
+      timeSlots.add(_time!); // Add the selected time to the list of time slots
+      await documentSnapshot.reference.update({'time_slots': timeSlots});
+    } else {
+      // If the document with the selected date does not exist, create a new one
+      await availabilities.add({
+        'date': date,
+        'time_slots': [_time!], // Create a new list with the selected time as the first element
+        'created_at': DateTime.now(),
+      });
+    }
 
     // Show a snackbar to indicate that the data was saved
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text('Data saved to Firestore')),
+    );
+  }
+
+  Future<void> _deleteData(String documentId) async {
+    await FirebaseFirestore.instance
+        .collection('availabilities')
+        .doc(documentId)
+        .delete();
+
+    // Show a snackbar to indicate that the data was deleted
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Data deleted from Firestore')),
     );
   }
 
@@ -92,7 +113,6 @@ class _AvailabilitiesState extends State<Availabilities> {
               : ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text('Select time and date')),
                 );
-          ;
         },
         child: Icon(Icons.add),
       ),
@@ -143,7 +163,6 @@ class _AvailabilitiesState extends State<Availabilities> {
                 ),
               ),
             ),
-
             StreamBuilder<QuerySnapshot>(
               stream: stream,
               builder: (BuildContext context,
@@ -157,12 +176,11 @@ class _AvailabilitiesState extends State<Availabilities> {
                     child: ListView.builder(
                       itemCount: documents.length,
                       itemBuilder: (BuildContext context, int index) {
+                        String documentId = documents[index].id;
                         Map<String, dynamic> data =
                             documents[index].data() as Map<String, dynamic>;
                         return InkWell(
-                          onLongPress: ()async{
-                            await FirebaseFirestore.instance.collection('availabilities').doc(documents[index].id).delete();
-                          },
+                          onLongPress: () => _deleteData(documentId),
                           child: Card(
                             elevation: 4,
                             margin:
@@ -173,9 +191,15 @@ class _AvailabilitiesState extends State<Availabilities> {
                                 style: TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.bold),
                               ),
-                              subtitle: Text(
-                                data['time'],
-                                style: TextStyle(fontSize: 16),
+                              subtitle: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  for (String time in data['time_slots'])
+                                    Text(
+                                      time,
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                ],
                               ),
                               trailing: Icon(Icons.timelapse_sharp),
                               onTap: () {
@@ -190,17 +214,6 @@ class _AvailabilitiesState extends State<Availabilities> {
                 }
               },
             )
-
-            // Card(
-            //   margin: const EdgeInsets.all(10),
-            //   color: Colors.green[100],
-            //   shadowColor: Colors.blueGrey,
-            //   elevation: 10,
-            //   child: Column(mainAxisSize: MainAxisSize.min, children: [
-            //     Text("Date: $date"),
-            //     Text("Time: ${_time}"),
-            //   ]),
-            // ),
           ],
         ),
       ),

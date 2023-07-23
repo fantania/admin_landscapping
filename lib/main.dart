@@ -31,6 +31,7 @@ class MyApp extends StatelessWidget {
       //...
     );
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: getMaterialColor(const Color(0xFF006766)),
@@ -122,20 +123,25 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              width: size.width - 40,
-              height: size.height / 10,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                color: const Color(0xFF006766),
-              ),
-              child: const Center(
-                child: Text(
-                  "List of Bookings",
-                  style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white),
+            InkWell(
+              onTap: (){
+                Get.to(BookingListScreen());
+              },
+              child: Container(
+                width: size.width - 40,
+                height: size.height / 10,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  color: const Color(0xFF006766),
+                ),
+                child: const Center(
+                  child: Text(
+                    "List of Bookings",
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
+                  ),
                 ),
               ),
             ),
